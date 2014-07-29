@@ -36,12 +36,12 @@ end
 def add_list
   puts "Enter a list name"
   list_input = gets.chomp
-  @list_arr << List.new(list_input)
+  List.new(list_input).save
 end
 
 def show_list
   puts "Here are your lists:"
-  @list_arr.each_with_index do |list, index|
+  List.all.each_with_index do |list, index|
     puts list.list_name + '  ' + index.to_s
   end
 end
@@ -54,7 +54,7 @@ def add_task
   puts "Enter a description of the new task:"
   user_description = gets.chomp
   newTask = Task.new(user_description)
-  @list_arr[marked_list].add_task(newTask)
+  List.all[marked_list].add_task(newTask)
   puts "Task added.\n\n"
 end
 
@@ -64,7 +64,7 @@ def list_tasks
   puts "please enter the number of the list"
   marked_list = gets.chomp.to_i
   puts "Here are all of your tasks:"
-  @list_arr[marked_list].tasks.each do |task|
+  List.all[marked_list].tasks.each do |task|
     puts task.description
   end
   puts "\n"
@@ -76,12 +76,12 @@ def remove_task
   puts "which list would you like to remove a task?"
   puts "please enter the number of the list"
   marked_list = gets.chomp.to_i
-  @list_arr[marked_list].tasks.each_with_index do |task, index|
+  List.all[marked_list].tasks.each_with_index do |task, index|
     puts task.description + '  ' + index.to_s
   end
   puts  "Enter the number of the task you would like to remove"
   marked_task = gets.chomp.to_i
-  @list_arr[marked_list].tasks.delete_at(marked_task)
+  List.all[marked_list].tasks.delete_at(marked_task)
 end
 
 def complete_task
@@ -89,11 +89,11 @@ def complete_task
   puts "Which list would you like to mark a task completed"
   marked_list = gets.chomp.to_i
   puts "Mark a task completed"
-  @list_arr[marked_list].tasks.each_with_index do |task, index|
+  List.all[marked_list].tasks.each_with_index do |task, index|
     puts task.description + '  ' + index.to_s
   end
   puts "Enter the number of the task you would like to mark as done"
   marked_task = gets.chomp.to_i
-  puts @list_arr[marked_list].tasks[marked_task].description << '  done'
+  puts List.all[marked_list].tasks[marked_task].description << '  done'
 end
 main_menu
