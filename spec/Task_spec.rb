@@ -1,28 +1,7 @@
 require 'rspec'
 require 'Task'
 require 'List'
-
 describe Task do
-  before do
-    Task.clear
-  end
-
-  describe '#save' do
-    it 'adds a task to the array of saved tasks' do
-      test_task = Task.new('wash the lion')
-      test_task.save
-      Task.all.should eq [test_task]
-    end
-  end
-
-  describe '.clear' do
-    it 'empties out all of the saved tasks' do
-      Task.new('wash the lion').save
-      Task.clear
-      Task.all.should eq []
-    end
-  end
-
   it 'is initialized with a description' do
     test_task = Task.new('scrub the zebra')
     test_task.should be_an_instance_of Task
@@ -31,12 +10,6 @@ describe Task do
   it 'lets you read the description out' do
     test_task = Task.new('scrub the zebra')
     test_task.description.should eq 'scrub the zebra'
-  end
-
-  describe '.all' do
-    it 'is empty at first' do
-      Task.all.should eq []
-    end
   end
 end
 
